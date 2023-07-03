@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\api\FigurController;
+use App\Http\Controllers\api\JenisBarangController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,4 +19,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('figur')->group(function () {
+    Route::get('/', [FigurController::class, 'index']);
+});
+
+Route::prefix('jenis-barang')->group(function () {
+    Route::get('/', [JenisBarangController::class, 'index']);
 });
