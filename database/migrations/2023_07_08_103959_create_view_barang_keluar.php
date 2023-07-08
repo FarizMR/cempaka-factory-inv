@@ -15,16 +15,16 @@ return new class extends Migration
      */
     public function up()
     {
-        $viewName = 'view_barang_masuk';
+        $viewName = 'view_barang_keluar';
         $sql = "
         CREATE VIEW $viewName AS 
-        select bm.id, bm.tanggal, f.nama as 'pemasok', jb.nama as 'jenis barang', jbm.jumlah, s.nama as 'satuan'
-        from barang_masuks bm 
-        join figurs f on bm.pemasok_id = f.id 
-        join jenis_barangs jb on bm.jenis_barang_id = jb.id 
-        join jumlah_barang_masuks jbm on jbm.barang_masuk_id = bm.id 
-        join satuans s on jbm.satuan_id = s.id 
-        order by bm.tanggal asc, bm.id 
+        select bk.id, bk.tanggal, f.nama as 'konsumen', jb.nama as 'jenis barang', jbk.jumlah, s.nama as 'satuan'
+        from barang_keluars bk
+        join figurs f on bk.konsumen_id = f.id 
+        join jenis_barangs jb on bk.jenis_barang_id = jb.id 
+        join jumlah_barang_keluars jbk on jbk.barang_keluar_id = bk.id 
+        join satuans s on jbk.satuan_id = s.id 
+        order by bk.tanggal asc, bk.id 
         ";
 
         DB::statement($sql);
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('view_barang_masuk');
+        Schema::dropIfExists('view_barang_keluar');
     }
 };
