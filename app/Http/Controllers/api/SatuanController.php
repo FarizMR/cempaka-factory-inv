@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Satuan;
 use Illuminate\Http\Request;
 
 class SatuanController extends Controller
@@ -14,7 +15,8 @@ class SatuanController extends Controller
      */
     public function index()
     {
-        //
+        $data = Satuan::paginate(10);
+        return response()->json($data);
     }
 
     /**

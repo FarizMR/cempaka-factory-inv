@@ -13,26 +13,33 @@
             </div>
 
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered text-center">
-                        <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Keterangan</th>
-                            </tr>
-                        </thead>
-                        <tbody v-if="jenisBarangs && jenisBarangs.data && jenisBarangs.data.length > 0">
-                            <tr v-for="(jb,index) in jenisBarangs.data" :key="index">
-                                <td>{{ jb.nama }}</td>
-                                <td>{{ jb.keterangan }}</td>
-                            </tr>
-                        </tbody>
-                        <tbody v-else>
-                            <tr>
-                                <td align="center" colspan="3">Data tidak ditemukan</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div v-if="loading">
+                    <div class="spinner-border text-secondary text-sm" role="status">
+                        <span class="sr-only">Memuat ...</span>
+                    </div>
+                </div>
+                <div v-else>
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody v-if="jenisBarangs && jenisBarangs.data && jenisBarangs.data.length > 0">
+                                <tr v-for="(jb,index) in jenisBarangs.data" :key="index">
+                                    <td>{{ jb.nama }}</td>
+                                    <td>{{ jb.keterangan }}</td>
+                                </tr>
+                            </tbody>
+                            <tbody v-else>
+                                <tr>
+                                    <td align="center" colspan="3">Data tidak ditemukan</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!-- <bootstrap-4-datatable :columns="columns" :data="rows" :filter="filter" :per-page="perPage"></bootstrap-4-datatable> -->
                 <!-- <bootstrap-4-datatable-pager v-model="page" type="abbreviated"></bootstrap-4-datatable-pager> -->
@@ -48,29 +55,43 @@
 
     DataTable.use(DataTablesCore);
 
+    let api = '/api/jenis-barang'
+
     export default {
         name:"jenisBarangs",
-        data(){
+        data() {
             return {
-                jenisBarangs:{
-                    type:Object,
-                    default:null
-                }
+                figurs: {
+                    type: Object,
+                    default: null
+                },
+                loading: true,
             }
         },
-        mounted(){
+        mounted() {
             this.list()
         },
-        methods:{
-            async list(){
-                await axios.get(`/api/jenis-barang`).then(({data})=>{
-                    this.jenisBarangs = data
-                }).catch(({ response })=>{
-                    console.error(response)
-                })
+        methods: {
+            async list() {
+                try {
+                    this.loading = true;
+
+                    await axios.get(api).then(({ data }) => {
+                        this.jenisBarangs = data
+                        console.log(this.jenisBarangs)
+                    }).catch(({ response }) => {
+                        console.error(response)
+                    })
+
+                    this.loading = false;
+                } catch(e)  {
+                    console.error(e)
+                }
             }
         }
     }
+
+    console.log("GET Request "+api)
 </script>
 
 <style scoped>

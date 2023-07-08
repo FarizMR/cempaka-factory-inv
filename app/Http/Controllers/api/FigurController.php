@@ -16,7 +16,8 @@ class FigurController extends Controller
      */
     public function index()
     {
-        return Figur::all();
+        $data = Figur::paginate(10);
+        return response()->json($data);
     }
 
     /**

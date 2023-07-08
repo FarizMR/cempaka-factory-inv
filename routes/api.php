@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\api\FigurController;
 use App\Http\Controllers\api\JenisBarangController;
+use App\Http\Controllers\api\SatuanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,8 @@ Route::prefix('figur')->group(function () {
 
 Route::prefix('jenis-barang')->group(function () {
     Route::get('/', [JenisBarangController::class, 'index']);
+});
+
+Route::prefix('satuan')->group(function () {
+    Route::get('/', [SatuanController::class, 'index']);
 });
