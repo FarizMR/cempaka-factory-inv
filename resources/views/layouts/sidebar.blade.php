@@ -39,7 +39,7 @@
                         <li class="nav-item">
                             <router-link :to="{ name: 'dashboard.pemasok-pembeli' }" active-class="active"
                                 class="nav-link">
-                                <i class="fas fa-users-cog nav-icon"></i>
+                                <i class="fas fa-users nav-icon"></i>
                                 <p>Pemasok/Pembeli</p>
                             </router-link>
                         </li>
@@ -54,7 +54,7 @@
 
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-folder-open"></i>
+                        <i class="nav-icon fas fa-exchange-alt"></i>
                         <p>
                             Transaksi
                             <i class="right fas fa-angle-left"></i>
@@ -64,14 +64,14 @@
                         <li class="nav-item">
                             <router-link :to="{ name: 'dashboard.barang-masuk' }" active-class="active"
                                 class="nav-link">
-                                <i class="fas fa-box nav-icon"></i>
+                                <i class="fas fa-arrow-right nav-icon"></i>
                                 <p>Barang Masuk</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
                             <router-link :to="{ name: 'dashboard.barang-keluar' }" active-class="active"
                                 class="nav-link">
-                                <i class="fas fa-users-cog nav-icon"></i>
+                                <i class="fas fa-arrow-left nav-icon"></i>
                                 <p>Barang Keluar</p>
                             </router-link>
                         </li>
