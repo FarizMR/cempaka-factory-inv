@@ -23,5 +23,15 @@ export default [
         path: '/satuan',
         name: 'dashboard.satuan',
         component: MasterSatuan,
+    },
+    {
+        path: '/barang-masuk',
+        name: 'dashboard.barang-masuk',
+        component: () => import('./components/BarangMasuk.vue'),
+    },
+    {
+        path: '/barang-keluar',
+        name: 'dashboard.barang-keluar',
+        component: () => import('./components/BarangKeluar.vue'),
     }
 ]

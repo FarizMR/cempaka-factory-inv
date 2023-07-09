@@ -30,33 +30,53 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <router-link to="/jenis-barang" active-class="active" class="nav-link">
+                            <router-link :to="{ name: 'dashboard.jenis-barang' }" active-class="active"
+                                class="nav-link">
                                 <i class="fas fa-box nav-icon"></i>
                                 <p>Jenis Barang</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/pemasok-pembeli" active-class="active" class="nav-link">
+                            <router-link :to="{ name: 'dashboard.pemasok-pembeli' }" active-class="active"
+                                class="nav-link">
                                 <i class="fas fa-users-cog nav-icon"></i>
                                 <p>Pemasok/Pembeli</p>
                             </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/satuan" active-class="active" class="nav-link">
+                            <router-link :to="{ name: 'dashboard.satuan' }" active-class="active" class="nav-link">
                                 <i class="fas fa-ruler nav-icon"></i>
                                 <p>Satuan</p>
                             </router-link>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+
+                <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-folder-open"></i>
                         <p>
-                            Simple Link
-                            <span class="right badge badge-danger">New</span>
+                            Transaksi
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'dashboard.barang-masuk' }" active-class="active"
+                                class="nav-link">
+                                <i class="fas fa-box nav-icon"></i>
+                                <p>Barang Masuk</p>
+                            </router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link :to="{ name: 'dashboard.barang-keluar' }" active-class="active"
+                                class="nav-link">
+                                <i class="fas fa-users-cog nav-icon"></i>
+                                <p>Barang Keluar</p>
+                            </router-link>
+                        </li>
+                    </ul>
+
                 </li>
             </ul>
         </nav>

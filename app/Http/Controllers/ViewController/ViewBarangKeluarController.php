@@ -11,6 +11,6 @@ class ViewBarangKeluarController extends Controller
     public function index()
     {
         $data = ViewBarangKeluar::paginate(10);
-        return response()->json($data);
+        return response()->json($data)->setStatusCode(200);
     }
 }
