@@ -8,6 +8,7 @@
     <title>AdminLTE 3 | Starter</title>
 
     @vite(['./resources/css/app.css', './resources/js/app.js'])
+    @vite(['./resources/css/custom.css'])
 </head>
 
 <body class="hold-transition sidebar-mini">

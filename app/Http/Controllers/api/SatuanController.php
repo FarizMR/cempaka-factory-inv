@@ -16,7 +16,7 @@ class SatuanController extends Controller
     public function index()
     {
         $data = Satuan::paginate(10);
-        return response()->json($data);
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**

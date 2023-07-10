@@ -17,7 +17,7 @@ class FigurController extends Controller
     public function index()
     {
         $data = Figur::paginate(10);
-        return response()->json($data);
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**
@@ -63,5 +63,19 @@ class FigurController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // Tambahan
+
+    public function getPemasok()
+    {
+        $data = Figur::where('isPemasok', true)->get();
+        return response()->json($data)->setStatusCode(200);;
+    }
+
+    public function getKonsumen()
+    {
+        $data = Figur::where('isKonsumen', true)->get();
+        return response()->json($data)->setStatusCode(200);;
     }
 }

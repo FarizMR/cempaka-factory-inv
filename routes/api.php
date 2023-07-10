@@ -26,6 +26,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('figur')->group(function () {
     Route::get('/', [FigurController::class, 'index']);
+    Route::get('/pemasok', [FigurController::class, 'getPemasok']);
+    Route::get('/konsumen', [FigurController::class, 'getKonsumen']);
 });
 
 Route::prefix('jenis-barang')->group(function () {

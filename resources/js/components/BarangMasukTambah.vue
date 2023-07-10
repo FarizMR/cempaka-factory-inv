@@ -1,0 +1,121 @@
+<template>
+    <div class="content-header">
+        <div class="container-fluid">
+            <h1>Tambah Transaksi Barang Masuk</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="card">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <form @submit.prevent="submitForm">
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2" for="tanggal">Tanggal:</label>
+                        <div class="col-sm-10">
+                            <input type="date" id="tanggal" v-model="tanggal" class="form-control form-control-sm">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2" for="pemasok">Pemasok:</label>
+                        <div class="col-sm-10">
+                            <select id="pemasok" v-model="selectedPemasok" class="form-control form-control-sm">
+                                <option v-for="pemasok in pemasokOptions" :value="pemasok.id" :key="pemasok.id">{{
+                                    pemasok.nama }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-form-label col-sm-2" for="barang">Barang:</label>
+                        <div class="col-sm-10">
+                            <select id="barang" v-model="selectedBarang" class="form-control form-control-sm">
+                                <option v-for="barang in barangOptions" :value="barang.id" :key="barang.id">{{
+                                    barang.nama
+                                    }}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="satuan">Satuan:</label> <button type="button" @click="addSatuan"
+                            class="btn btn-sm btn-outline-success">Tambah Satuan</button>
+                        <div class="row">
+                            <div class="col-sm-6" v-for="(item, index) in satuanItems" :key="index">
+                                <input type="number" class="form-control my-1" v-model="item.jumlahSatuan"
+                                    placeholder="Jumlah">
+                                <select v-model="item.selectedSatuan" class="form-control my-1">
+                                    <option v-for="satuan in satuanOptions" :value="satuan.id" :key="satuan.id">{{
+                                        satuan.nama }}</option>
+                                </select>
+                                <button @click="removeSatuan(index)" class="btn btn-sm btn-danger my-2"><i
+                                        class="fa fa-eraser"></i> Hapus</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success float-right"><i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                            Tambah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import axios from 'axios';
+
+    export default {
+        data() {
+            return {
+                tanggal: '',
+                selectedPemasok: null,
+                selectedBarang: null,
+                satuanItems: [],
+                pemasokOptions: [],
+                barangOptions: [],
+                satuanOptions: [],
+            };
+        },
+        async mounted() {
+            try {
+                // Fetch pemasok options from API
+                const pemasokResponse = await axios.get('/api/figur/pemasok');
+                this.pemasokOptions = pemasokResponse.data;
+
+                // Fetch barang options from API
+                const barangResponse = await axios.get('/api/jenis-barang').then(response => {
+                    return response.data;
+                });
+                this.barangOptions = barangResponse.data;
+
+                // Fetch satuan options from API
+                const satuanResponse = await axios.get('/api/satuan').then(response => {
+                    return response.data;
+                });
+                this.satuanOptions = satuanResponse.data;
+
+            } catch (e) {
+                console.log(e);
+            }
+        },
+        methods: {
+            addSatuan() {
+                this.satuanItems.push({ selectedSatuan: null });
+            },
+            removeSatuan(index) {
+                this.satuanItems.splice(index, 1);
+            },
+            submitForm() {
+                // Perform form submission logic
+                console.log('Tanggal:', this.tanggal);
+                console.log('Pemasok:', this.selectedPemasok);
+                console.log('Barang:', this.selectedBarang);
+                console.log('Jumlah:', this.satuanItems.map(item => [item.jumlahSatuan, item.selectedSatuan]));
+                // ...
+            }
+        }
+    };
+</script>

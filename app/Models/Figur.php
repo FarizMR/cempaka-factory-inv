@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 
 class Figur extends Model
 {
-    
+
     use HasUuids;
 
     public $table = 'figurs';

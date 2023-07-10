@@ -1,15 +1,15 @@
 <template>
     <div class="content-header">
         <div class="container-fluid">
-            <h1>
-                Satuan
-            </h1>
+            <h1>Satuan</h1>
         </div>
     </div>
     <div class="content">
         <div class="card">
-
             <div class="card-header">
+                <button type="button" class="btn btn-sm btn-success float-right" @click="openModal">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Tambah
+                </button>
             </div>
 
             <div class="card-body">
@@ -27,7 +27,7 @@
                                 </tr>
                             </thead>
                             <tbody v-if="satuans && satuans.data && satuans.data.length > 0">
-                                <tr v-for="(sat,index) in satuans.data" :key="index">
+                                <tr v-for="(sat, index) in satuans.data" :key="index">
                                     <td>{{ sat.nama }}</td>
                                 </tr>
                             </tbody>
@@ -42,18 +42,44 @@
                 <!-- <bootstrap-4-datatable :columns="columns" :data="rows" :filter="filter" :per-page="perPage"></bootstrap-4-datatable> -->
                 <!-- <bootstrap-4-datatable-pager v-model="page" type="abbreviated"></bootstrap-4-datatable-pager> -->
             </div>
+        </div>
+    </div>
 
+    <div class="modal fade" tabindex="-1" role="dialog" ref="myModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tambah Satuan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="closeModal">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nama">Nama:</label>
+                        <input type="text" class="form-control" id="nama" v-model="nama" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="closeModal">
+                        Batal
+                    </button>
+                    <button type="button" class="btn btn-primary" @click="saveData">
+                        Simpan
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import DataTable from 'datatables.net-vue3';
-    import DataTablesCore from 'datatables.net';
+    import DataTable from "datatables.net-vue3";
+    import DataTablesCore from "datatables.net";
 
     DataTable.use(DataTablesCore);
 
-    let api = '/api/satuan'
+    let api = "/api/satuan";
 
     export default {
         name: "satuans",
@@ -61,33 +87,44 @@
             return {
                 satuans: {
                     type: Object,
-                    default: null
+                    default: null,
                 },
                 loading: true,
-            }
+            };
         },
         mounted() {
-            this.list()
+            this.list();
         },
         methods: {
             async list() {
                 try {
                     this.loading = true;
 
-                    await axios.get(api).then(({ data }) => {
-                        this.satuans = data
-                        console.log(this.satuans);
-                    }).catch(({ response }) => {
-                        console.error(response)
-                    })
-                    
+                    await axios
+                        .get(api)
+                        .then(({ data }) => {
+                            this.satuans = data;
+                            console.log(this.satuans);
+                        })
+                        .catch(({ response }) => {
+                            console.error(response);
+                        });
+
                     this.loading = false;
                 } catch (e) {
-                    console.error(e)
+                    console.error(e);
                 }
-            }
-        }
-    }
+            },
+            openModal() {
+                this.$refs.myModal.classList.add("show");
+                this.$refs.myModal.style.display = "block";
+            },
+            closeModal() {
+                this.$refs.myModal.classList.remove("show");
+                this.$refs.myModal.style.display = "none";
+            },
+        },
+    };
 
     console.log("GET Request " + api);
 </script>
