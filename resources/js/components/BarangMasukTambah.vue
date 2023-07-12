@@ -56,7 +56,7 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success float-right"><i class="fa fa-plus"
                                 aria-hidden="true"></i>
-                            Tambah</button>
+                            Tambah Transaksi</button>
                     </div>
                 </form>
             </div>

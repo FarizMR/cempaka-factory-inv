@@ -106,9 +106,3 @@
 
     console.log("GET Request " + api);
 </script>
-
-<style scoped>
-    .pagination {
-        margin-bottom: 0;
-    }
-</style>

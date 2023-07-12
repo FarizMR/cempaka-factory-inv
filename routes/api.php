@@ -26,16 +26,19 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('figur')->group(function () {
     Route::get('/', [FigurController::class, 'index']);
+    Route::get('/{id}', [FigurController::class, 'show']);
     Route::get('/pemasok', [FigurController::class, 'getPemasok']);
     Route::get('/konsumen', [FigurController::class, 'getKonsumen']);
 });
 
 Route::prefix('jenis-barang')->group(function () {
     Route::get('/', [JenisBarangController::class, 'index']);
+    Route::get('/{id}', [JenisBarangController::class, 'show']);
 });
 
 Route::prefix('satuan')->group(function () {
     Route::get('/', [SatuanController::class, 'index']);
+    Route::get('/{id}', [SatuanController::class, 'show']);
 });
 
 Route::prefix('barang-masuk')->group(function () {

@@ -38,7 +38,8 @@ class SatuanController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = Satuan::find($id);
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**

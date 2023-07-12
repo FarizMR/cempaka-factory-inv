@@ -39,8 +39,8 @@ class FigurController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $data = Figur::find($id);
+        return response()->json($data)->setStatusCode(200);;    }
 
     /**
      * Update the specified resource in storage.

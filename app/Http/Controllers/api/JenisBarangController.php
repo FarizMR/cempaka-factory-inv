@@ -39,7 +39,8 @@ class JenisBarangController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = JenisBarang::find($id);
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**
