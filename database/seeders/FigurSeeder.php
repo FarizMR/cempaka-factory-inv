@@ -40,5 +40,20 @@ class FigurSeeder extends Seeder
             'nama' => 'Toko Tembakau Bintuni',
             'isKonsumen' => true,
         ]);
+
+        Figur::create([
+            'nama' => 'Toko Tembakau Sorong',
+            'isKonsumen' => true,
+        ]);
+
+        Figur::create([
+            'nama' => 'Manado Cigarette',
+            'isKonsumen' => true,
+        ]);
+
+        Figur::create([
+            'nama' => 'Reyza Smokeroom',
+            'isKonsumen' => true,
+        ]);
     }
 }

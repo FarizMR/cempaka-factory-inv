@@ -26,6 +26,7 @@ class JenisBarangSeeder extends Seeder
 
         JenisBarang::create([
             'nama' => 'Tembakau #C03',
+            'keterangan' => 'Tembakau #C dengan kualitas 3',
         ]);
     }
 }

@@ -44,5 +44,53 @@ class JumlahBarangKeluarSeeder extends Seeder
             'satuan_id' => $satuan[1],
             'jumlah' => 42,
         ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[2],
+            'satuan_id' => $satuan[0],
+            'jumlah' => 39,
+        ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[2],
+            'satuan_id' => $satuan[1],
+            'jumlah' => 42,
+        ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[3],
+            'satuan_id' => $satuan[0],
+            'jumlah' => 39,
+        ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[3],
+            'satuan_id' => $satuan[1],
+            'jumlah' => 42,
+        ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[4],
+            'satuan_id' => $satuan[0],
+            'jumlah' => 39,
+        ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[4],
+            'satuan_id' => $satuan[1],
+            'jumlah' => 42,
+        ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[5],
+            'satuan_id' => $satuan[0],
+            'jumlah' => 39,
+        ]);
+
+        JumlahBarangKeluar::create([
+            'barang_keluar_id' => $barang_keluar[5],
+            'satuan_id' => $satuan[1],
+            'jumlah' => 42,
+        ]);
     }
 }

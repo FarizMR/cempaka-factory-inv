@@ -7,7 +7,7 @@
   <div class="content">
     <div class="card">
       <div class="card-header">
-        <button type="button" class="btn btn-sm btn-success float-right" @click="redirretTambah">
+        <button type="button" class="btn btn-sm btn-success float-right" @click="redirrectTambah">
           <i class="fa fa-plus" aria-hidden="true"></i> Tambah
         </button>
       </div>
@@ -98,7 +98,7 @@
           console.error(e);
         }
       },
-      redirretTambah() {
+      redirrectTambah() {
         this.$router.push({ name: "dashboard.barang-masuk.tambah" });
       },
     },

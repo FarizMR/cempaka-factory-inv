@@ -34,5 +34,40 @@ class BarangKeluarSeeder extends Seeder
             'keterangan' => 'Lorem ipsum',
             'tanggal' => Carbon::now()->toDateString(),
         ]);
+
+        BarangKeluar::create([
+            'konsumen_id' => $konsumen[3],
+            'jenis_barang_id' => $jenisBarang[1],
+            'keterangan' => 'Lorem ipsum',
+            'tanggal' => Carbon::now()->add(-5, 'day')->toDateString(),
+        ]);
+
+        BarangKeluar::create([
+            'konsumen_id' => $konsumen[3],
+            'jenis_barang_id' => $jenisBarang[1],
+            'keterangan' => 'Lorem ipsum',
+            'tanggal' => Carbon::now()->add(-4, 'day')->toDateString(),
+        ]);
+
+        BarangKeluar::create([
+            'konsumen_id' => $konsumen[3],
+            'jenis_barang_id' => $jenisBarang[1],
+            'keterangan' => 'Lorem ipsum',
+            'tanggal' => Carbon::now()->add(-3, 'day')->toDateString(),
+        ]);
+
+        BarangKeluar::create([
+            'konsumen_id' => $konsumen[3],
+            'jenis_barang_id' => $jenisBarang[1],
+            'keterangan' => 'Lorem ipsum',
+            'tanggal' => Carbon::now()->add(-2, 'day')->toDateString(),
+        ]);
+
+        BarangKeluar::create([
+            'konsumen_id' => $konsumen[3],
+            'jenis_barang_id' => $jenisBarang[1],
+            'keterangan' => 'Lorem ipsum',
+            'tanggal' => Carbon::now()->add(-1, 'day')->toDateString(),
+        ]);
     }
 }

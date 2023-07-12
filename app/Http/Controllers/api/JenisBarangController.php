@@ -52,7 +52,12 @@ class JenisBarangController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = JenisBarang::find($id);
+        $data->nama = $request->nama;
+        $data->keterangan = $request->keterangan;
+        $data->save();
+
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**

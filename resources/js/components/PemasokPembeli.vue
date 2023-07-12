@@ -7,13 +7,13 @@
     <div class="content">
         <div class="card">
             <div class="card-header">
-                <button type="button" class="btn btn-sm btn-success float-right" @click="openModal">
+                <button type="button" class="btn btn-sm btn-success float-right" @click="openAddModal">
                     <i class="fa fa-plus" aria-hidden="true"></i> Tambah
                 </button>
             </div>
 
             <div class="card-body">
-                <div v-if="loading">
+                <div v-if="loading1">
                     <div class="spinner-border text-secondary text-sm" role="status">
                         <span class="sr-only">Memuat ...</span>
                     </div>
@@ -24,8 +24,9 @@
                             <thead>
                                 <tr>
                                     <th>Nama</th>
-                                    <th style="width:10%">Pemasok</th>
-                                    <th style="width:10%">Konsumen</th>
+                                    <th style="width: 10%">Pemasok</th>
+                                    <th style="width: 10%">Konsumen</th>
+                                    <th style="width: 10%"></th>
                                 </tr>
                             </thead>
                             <tbody v-if="figurs && figurs.data && figurs.data.length > 0">
@@ -33,12 +34,17 @@
                                     <td>{{ fg.nama }}</td>
                                     <td>
                                         <span v-if="fg.isPemasok"
-                                            style="font-weight: bolder; color: green;">&#10003;</span>
+                                            style="font-weight: bolder; color: green">&#10003;</span>
                                     </td>
 
                                     <td>
                                         <span v-if="fg.isKonsumen"
-                                            style="font-weight: bolder; color: green;">&#10003;</span>
+                                            style="font-weight: bolder; color: green">&#10003;</span>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-sm btn-info" @click="editData(fg.id)">
+                                            <i class="fa fa-edit"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -56,6 +62,7 @@
         </div>
     </div>
 
+    <!-- Add modal -->
     <div class="modal fade" tabindex="-1" role="dialog" ref="myModal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -91,6 +98,55 @@
             </div>
         </div>
     </div>
+
+    <!-- Edit modal -->
+    <div class="modal fade" tabindex="-1" role="dialog" ref="editModal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form @submit.prevent="">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-bold">Edit Pemasok/Pembeli</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            @click="closeEditModal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div v-if="loading2">
+                            <div class="spinner-border text-secondary text-sm" role="status">
+                                <span class="sr-only">Memuat ...</span>
+                            </div>
+                        </div>
+                        <div v-else>
+                            <input type="hidden" name="id" v-model="idEdit" />
+
+                            <div class="form-group">
+                                <label for="nama">Nama Barang:</label>
+                                <input type="text" class="form-control" name="nama" v-model="namaEdit" required />
+                            </div>
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="isPemasokEdit"
+                                    v-model="isPemasokEdit" />
+                                <label class="form-check-label" for="isPemasok">Pemasok</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="isKonsumenEdit"
+                                    v-model="isKonsumenEdit" />
+                                <label class="form-check-label" for="isKonsumen">Konsumen</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" @click="closeEditModal">
+                            Batal
+                        </button>
+                        <button @click="submitEdit" type="submit" class="btn btn-success">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -99,6 +155,7 @@
     import axios from "axios";
     import "datatables.net-dt/css/jquery.dataTables.css";
     import $ from "jquery";
+    import toastAlert from "../toast.js";
 
     DataTable.use(DataTablesCore);
 
@@ -112,8 +169,11 @@
                     type: Object,
                     default: null,
                 },
-                loading: true,
+                loading1: true,
+                loading2: true,
                 dataTable: null,
+                isPemasokEdit: false,
+                isKonsumenEdit: false,
             };
         },
         mounted() {
@@ -122,7 +182,7 @@
         methods: {
             async list() {
                 try {
-                    this.loading = true;
+                    this.loading1 = true;
 
                     await axios
                         .get(api)
@@ -134,13 +194,13 @@
                             console.error(response);
                         });
 
-                    this.loading = false;
+                    this.loading1 = false;
                     this.initializeDataTable();
                 } catch (e) {
                     console.error(e);
                 }
             },
-            openModal() {
+            openAddModal() {
                 this.$refs.myModal.classList.add("show");
                 this.$refs.myModal.style.display = "block";
             },
@@ -154,14 +214,78 @@
                     searching: true,
                 });
             },
+            async editData(id) {
+                this.$refs.editModal.classList.add("show");
+                this.$refs.editModal.style.display = "block";
+
+                this.loading2 = true;
+
+                let getDataApi = "/api/figur/" + id;
+
+                try {
+                    await axios
+                        .get(getDataApi)
+                        .then(({ data }) => {
+                            this.figur = data;
+
+                            console.log(this.figur);
+
+                            this.idEdit = data.id;
+                            this.namaEdit = data.nama;
+
+                            if (data.isPemasok == 1) {
+                                this.isPemasokEdit = true;
+                            }
+                            if (data.isKonsumen == 1) {
+                                this.isKonsumenEdit = true;
+                            }
+                        })
+                        .catch(({ response }) => {
+                            console.error(response);
+                        });
+                } catch (e) {
+                    console.error(e);
+                }
+
+                this.loading2 = false;
+            },
+            closeEditModal() {
+                this.figur = null;
+
+                this.idEdit = null;
+                this.namaEdit = null;
+                this.isPemasokEdit = false;
+                this.isKonsumenEdit = false;
+
+                this.$refs.editModal.classList.remove("show");
+                this.$refs.editModal.style.display = "none";
+            },
+            submitEdit() {
+                let data = {
+                    id: this.idEdit,
+                    nama: this.namaEdit,
+                    isPemasok: this.isPemasokEdit,
+                    isKonsumen: this.isKonsumenEdit,
+                };
+
+                let editApi = "/api/figur/" + this.idEdit;
+
+                axios
+                    .put(editApi, data)
+                    .then(({ data }) => {
+                        console.log(data);
+                        this.closeEditModal();
+
+                        toastAlert("Berhasil mengubah data");
+
+                        this.list();
+                    })
+                    .catch(({ response }) => {
+                        console.log(response);
+                    });
+            },
         },
     };
 
     console.log("GET Request " + api);
 </script>
-
-<style scoped>
-    .pagination {
-        margin-bottom: 0;
-    }
-</style>

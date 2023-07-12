@@ -8,6 +8,7 @@ import { createApp } from 'vue/dist/vue.esm-bundler.js';
 import { createRouter, createWebHistory } from 'vue-router';
 import DataTable from 'datatables.net-vue3';
 import routes from './routes';
+import VueSweetalert2 from 'vue-sweetalert2';
 
 const app = createApp({});
 
@@ -18,5 +19,6 @@ const router = createRouter({
 
 app.use(DataTable);
 app.use(router);
+app.use(VueSweetalert2);
 app.mount('#app');
 
