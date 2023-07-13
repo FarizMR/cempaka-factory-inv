@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+
+Route::get('/login', function () {
+    return view('login-page');
+});
 Route::get('{view}', ApplicationController::class)->where('view', '(.*)');
 
 // Route::get('/', function () {

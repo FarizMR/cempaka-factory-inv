@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\api\LoginController;
 use App\Http\Controllers\api\FigurController;
 use App\Http\Controllers\api\JenisBarangController;
 use App\Http\Controllers\api\SatuanController;
@@ -20,8 +21,13 @@ use App\Http\Controllers\ViewController\ViewBarangKeluarController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+Route::prefix('user')->group(function () {
+    Route::post('/login', [LoginController::class, 'login'])->name('api.login');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('api.logout');
 });
 
 Route::prefix('figur')->group(function () {
