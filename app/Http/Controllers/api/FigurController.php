@@ -28,7 +28,13 @@ class FigurController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Figur();
+        $data->nama = $request->nama;
+        $data->isPemasok = ($request->isPemasok == null) ? false : $request->isPemasok;
+        $data->isKonsumen = ($request->isKonsumen == null) ? false : $request->isKonsumen;
+        $data->save();
+
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**
@@ -69,7 +75,10 @@ class FigurController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Figur::find($id);
+        $data->delete();
+
+        return response()->json($data)->setStatusCode(200);;
     }
 
     // Tambahan

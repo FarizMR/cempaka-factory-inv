@@ -27,7 +27,11 @@ class SatuanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Satuan();
+        $data->nama = $request->nama;
+        $data->save();
+
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**
@@ -66,6 +70,7 @@ class SatuanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Satuan::find($id);
+        $data->delete();
     }
 }

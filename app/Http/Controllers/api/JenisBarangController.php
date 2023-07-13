@@ -28,7 +28,12 @@ class JenisBarangController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new JenisBarang();
+        $data->nama = $request->nama;
+        $data->keterangan = $request->keterangan;
+        $data->save();
+
+        return response()->json($data)->setStatusCode(200);;
     }
 
     /**
@@ -68,6 +73,9 @@ class JenisBarangController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = JenisBarang::find($id);
+        $data->delete();
+
+        return response()->json($data)->setStatusCode(200);;
     }
 }
