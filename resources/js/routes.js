@@ -43,5 +43,15 @@ export default [
         path: '/barang-keluar/tambah',
         name: 'dashboard.barang-keluar.tambah',
         component: () => import('./components/BarangKeluarTambah.vue'),
-    }
+    },
+    {
+        path: '/barang-masuk/edit/:id',
+        name: 'dashboard.barang-masuk.edit',
+        component: () => import('./components/BarangMasukEdit.vue'),
+    },
+    {
+        path: '/barang-keluar/edit/:id',
+        name: 'dashboard.barang-keluar.edit',
+        component: () => import('./components/BarangKeluarEdit.vue'),
+    },
 ]

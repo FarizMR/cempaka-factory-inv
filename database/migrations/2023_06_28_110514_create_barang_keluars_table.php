@@ -15,7 +15,7 @@ class CreateBarangKeluarsTable extends Migration
     {
         Schema::create('barang_keluars', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->dateTime('tanggal');
+            $table->date('tanggal');
             $table->foreignUuid('konsumen_id');
             $table->foreignUuid('jenis_barang_id');
             $table->string('keterangan')->nullable();

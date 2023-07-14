@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-    function toast(text = "") {
+    function toast(text = "", icon = "success") {
         const Toast = Swal.mixin({
             toast: true,
             position: 'bottom-end',
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2';
         })
     
         Toast.fire({
-            icon: 'success',
+            icon: icon,
             title: text
         });
     }

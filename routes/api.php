@@ -36,11 +36,13 @@ Route::prefix('user')->group(function () {
 Route::prefix('figur')->group(function () {
     Route::get('/', [FigurController::class, 'index']);
     Route::post('/', [FigurController::class, 'store']);
+
+    Route::get('/pemasok', [FigurController::class, 'getPemasok']);
+    Route::get('/konsumen', [FigurController::class, 'getKonsumen']);
+
     Route::get('/{id}', [FigurController::class, 'show']);
     Route::put('/{id}', [FigurController::class, 'update']);
     Route::delete('/{id}', [FigurController::class, 'destroy']);
-    Route::get('/pemasok', [FigurController::class, 'getPemasok']);
-    Route::get('/konsumen', [FigurController::class, 'getKonsumen']);
 });
 
 Route::prefix('jenis-barang')->group(function () {
@@ -61,16 +63,16 @@ Route::prefix('satuan')->group(function () {
 
 Route::prefix('barang-masuk')->group(function () {
     Route::get('/', [BarangMasukController::class, 'index']);
-    // Route::post('/', [BarangMasukController::class, 'store']);
-    // Route::get('/{id}', [BarangMasukController::class, 'show']);
+    Route::post('/', [BarangMasukController::class, 'store']);
+    Route::get('/{id}', [BarangMasukController::class, 'show']);
     // Route::update('/{id}', [BarangMasukController::class, 'update']);
     // Route::delete('/{id}', [BarangMasukController::class, 'destroy']);
 });
 
 Route::prefix('barang-keluar')->group(function () {
     Route::get('/', [BarangKeluarController::class, 'index']);
-    // Route::post('/', [BarangKeluarController::class, 'store']);
-    // Route::get('/{id}', [BarangKeluarController::class, 'show']);
+    Route::post('/', [BarangKeluarController::class, 'store']);
+    Route::get('/{id}', [BarangKeluarController::class, 'show']);
     // Route::update('/{id}', [BarangKeluarController::class, 'update']);
     // Route::delete('/{id}', [BarangKeluarController::class, 'destroy']);
 });
