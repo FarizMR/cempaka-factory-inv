@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\api\BarangKeluarController;
+use App\Http\Controllers\api\BarangMasukController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,6 +11,7 @@ use App\Http\Controllers\api\JenisBarangController;
 use App\Http\Controllers\api\SatuanController;
 use App\Http\Controllers\ViewController\ViewBarangMasukController;
 use App\Http\Controllers\ViewController\ViewBarangKeluarController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,9 +60,22 @@ Route::prefix('satuan')->group(function () {
 });
 
 Route::prefix('barang-masuk')->group(function () {
-    Route::get('/', [ViewBarangMasukController::class, 'index']);
+    Route::get('/', [BarangMasukController::class, 'index']);
+    // Route::post('/', [BarangMasukController::class, 'store']);
+    // Route::get('/{id}', [BarangMasukController::class, 'show']);
+    // Route::update('/{id}', [BarangMasukController::class, 'update']);
+    // Route::delete('/{id}', [BarangMasukController::class, 'destroy']);
 });
 
 Route::prefix('barang-keluar')->group(function () {
-    Route::get('/', [ViewBarangKeluarController::class, 'index']);
+    Route::get('/', [BarangKeluarController::class, 'index']);
+    // Route::post('/', [BarangKeluarController::class, 'store']);
+    // Route::get('/{id}', [BarangKeluarController::class, 'show']);
+    // Route::update('/{id}', [BarangKeluarController::class, 'update']);
+    // Route::delete('/{id}', [BarangKeluarController::class, 'destroy']);
+});
+
+Route::prefix('view-table')->group(function () {
+    Route::get('/barang-masuk', [ViewBarangMasukController::class, 'index']);
+    Route::get('/barang-keluar', [ViewBarangKeluarController::class, 'index']);
 });

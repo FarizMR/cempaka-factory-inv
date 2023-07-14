@@ -62,7 +62,7 @@
 
     DataTable.use(DataTablesCore);
 
-    let api = "/api/barang-keluar";
+    let api = "/api/view-table/barang-keluar";
 
     export default {
         name: "barangKeluars",
