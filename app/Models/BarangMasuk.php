@@ -12,4 +12,19 @@ class BarangMasuk extends Model
     public $table = 'barang_masuks';
     public $incrementing = false;
     public $keyType = 'string';
+
+    public function figur()
+    {
+        return $this->belongsTo(Figur::class, 'pemasok_id');
+    }
+
+    public function jenis_barang()
+    {
+        return $this->belongsTo(JenisBarang::class, 'jenis_barang_id');
+    }
+
+    public function jumlah_barang_masuk()
+    {
+        return $this->hasMany(JumlahBarangMasuk::class, 'barang_masuk_id');
+    }
 }

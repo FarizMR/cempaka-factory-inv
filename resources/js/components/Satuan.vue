@@ -36,10 +36,10 @@
                                     <td>{{ sat.nama }}</td>
                                     <td>
                                         <div class="btn-group">
-                                            <button class="btn btn-sm btn-info" @click="editData(sat.id)">
+                                            <button class="btn btn-sm btn-info" @click="editData(sat.id)" title="Edit Data">
                                                 <i class="fa fa-edit"></i>
                                             </button>
-                                            <button class="btn btn-sm btn-danger" @click="hapusData(sat.id)">
+                                            <button class="btn btn-sm btn-danger" @click="hapusData(sat.id)" title="Hapus Data">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </div>

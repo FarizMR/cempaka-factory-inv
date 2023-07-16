@@ -11,6 +11,7 @@ class ViewBarangMasukController extends Controller
     public function index()
     {
         $data = ViewBarangMasuk::paginate(10);
+        // dd($data);
         return response()->json($data)->setStatusCode(200);
     }
 }

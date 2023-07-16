@@ -64,9 +64,9 @@ Route::prefix('satuan')->group(function () {
 Route::prefix('barang-masuk')->group(function () {
     Route::get('/', [BarangMasukController::class, 'index']);
     Route::post('/', [BarangMasukController::class, 'store']);
+    Route::delete('/{id}', [BarangMasukController::class, 'destroy']);
     Route::get('/{id}', [BarangMasukController::class, 'show']);
-    // Route::update('/{id}', [BarangMasukController::class, 'update']);
-    // Route::delete('/{id}', [BarangMasukController::class, 'destroy']);
+    Route::put('/{id}', [BarangMasukController::class, 'update']);
 });
 
 Route::prefix('barang-keluar')->group(function () {

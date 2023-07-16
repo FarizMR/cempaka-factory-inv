@@ -52,12 +52,14 @@
                                         <div class="btn-group">
                                             <button
                                                 class="btn btn-sm btn-info"
+                                                title="Edit Data"
                                                 @click="editData(jb.id)"
                                             >
                                                 <i class="fa fa-edit"></i>
                                             </button>
                                             <button
                                                 class="btn btn-sm btn-danger"
+                                                title="Hapus Data"
                                                 @click="hapusData(jb.id)"
                                             >
                                                 <i class="fa fa-trash"></i>
