@@ -72,9 +72,9 @@ Route::prefix('barang-masuk')->group(function () {
 Route::prefix('barang-keluar')->group(function () {
     Route::get('/', [BarangKeluarController::class, 'index']);
     Route::post('/', [BarangKeluarController::class, 'store']);
+    Route::delete('/{id}', [BarangKeluarController::class, 'destroy']);
     Route::get('/{id}', [BarangKeluarController::class, 'show']);
-    // Route::update('/{id}', [BarangKeluarController::class, 'update']);
-    // Route::delete('/{id}', [BarangKeluarController::class, 'destroy']);
+    Route::put('/{id}', [BarangKeluarController::class, 'update']);
 });
 
 Route::prefix('view-table')->group(function () {

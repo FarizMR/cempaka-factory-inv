@@ -12,4 +12,19 @@ class BarangKeluar extends Model
     public $table = 'barang_keluars';
     public $incrementing = false;
     public $keyType = 'string';
+
+    public function figur()
+    {
+        return $this->belongsTo(Figur::class, 'konsumen_id');
+    }
+
+    public function jenis_barang()
+    {
+        return $this->belongsTo(JenisBarang::class, 'jenis_barang_id');
+    }
+
+    public function jumlah_barang_keluar()
+    {
+        return $this->hasMany(JumlahBarangKeluar::class, 'barang_keluar_id');
+    }
 }
