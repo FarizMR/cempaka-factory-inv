@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ViewBarangKeluar extends Model
 {
     public $table = 'view_barang_keluar';
+
+    public $casts = [
+        'id' => 'string',
+    ];
 }
