@@ -18,16 +18,15 @@ return new class extends Migration
         $viewName = 'view_barang_keluar';
         $sql = "
         CREATE OR REPLACE VIEW $viewName AS 
-        SELECT bk.id, DATE_FORMAT(bk.tanggal, '%e %M %Y') AS 'tanggal', f.nama AS 'konsumen', jb.nama AS 'jenis_barang',
-        GROUP_CONCAT(CONCAT(jbk.jumlah, ' ', s.nama) order by s.nama SEPARATOR ', ') AS 'jumlah'
-        FROM barang_keluars bk
-        JOIN figurs f ON bk.konsumen_id = f.id 
-        JOIN jenis_barangs jb ON bk.jenis_barang_id = jb.id 
-        JOIN jumlah_barang_keluars jbk ON jbk.barang_keluar_id = bk.id 
-        JOIN satuans s ON jbk.satuan_id = s.id 
-        GROUP BY bk.id, bk.tanggal, f.nama, jb.nama
-        ORDER BY bk.tanggal DESC, bk.id
-        ";
+            SELECT bk.id, DATE_FORMAT(bk.tanggal, '%e %M %Y') AS 'tanggal', f.nama AS 'konsumen', jb.nama AS 'jenis_barang',
+            IFNULL(GROUP_CONCAT(CONCAT(jbk.jumlah, ' ', s.nama) ORDER BY s.nama SEPARATOR ', '), '-') AS 'jumlah'
+            FROM barang_keluars bk
+            JOIN figurs f ON bk.konsumen_id = f.id 
+            JOIN jenis_barangs jb ON bk.jenis_barang_id = jb.id 
+            LEFT JOIN jumlah_barang_keluars jbk ON jbk.barang_keluar_id = bk.id 
+            LEFT JOIN satuans s ON jbk.satuan_id = s.id 
+            GROUP BY bk.id, bk.tanggal, f.nama, jb.nama
+            ORDER BY bk.tanggal DESC, bk.id;";
 
         DB::statement($sql);
     }
