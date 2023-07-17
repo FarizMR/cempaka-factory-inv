@@ -21,8 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/login', function () {
     return view('login-page');
-});
-Route::get('{view}', ApplicationController::class)->where('view', '(.*)');
+})->name('login-view')
+    ->middleware(['web', 'guest']);
+
+Route::get('{view}', ApplicationController::class)
+    ->middleware(['web', 'auth'])
+    ->where('view', '(.*)');
 
 // Route::get('/', function () {
 //     return view('dashboard');

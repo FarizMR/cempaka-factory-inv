@@ -3,27 +3,54 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     public function login(Request $request)
     {
         $data = [
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => $request->password
         ];
-        if (auth()->attempt($data)) {
-            $user = auth()->user();
-            $token = $user->createToken('authToken')->accessToken;
-            return response()->json([
-                'user' => $user,
-                'token' => $token
-            ])->setStatusCode(200);
+
+        $result = [];
+
+        if(!Auth::attempt(['username' => $data['username'], 'password' => $data['password']])) {
+            $result = [
+                'valid' => false
+            ];
+
+            return $result;
         } else {
-            return response()->json([
-                'message' => 'Email atau password salah'
-            ])->setStatusCode(401);
+            $request->session()->regenerate();
+
+            $result = [
+                'valid' => true
+            ];
+
+            return $result;
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        $data = [
+            'valid' => true
+        ];
+
+        return $data;
+    }
+
+    public function getAuthenticatedUser()
+    {
+        $data = Auth::user();
+
+        return response()->json($data)->setStatusCode(200);
     }
 }
