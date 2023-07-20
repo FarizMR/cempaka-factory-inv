@@ -234,6 +234,8 @@ export default {
                 type: Object,
                 default: null,
             },
+            nama: "",
+            keterangan: "",
             idEdit: "",
             namaEdit: "",
             keteranganEdit: "",
