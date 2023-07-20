@@ -113,6 +113,7 @@
                                     <button
                                         @click="removeSatuan(index)"
                                         class="btn btn-sm btn-danger my-2"
+                                        type="button"
                                     >
                                         <i class="fa fa-eraser"></i> Hapus
                                     </button>
